@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactStars from 'react-rating-stars-component';
 import { Restaurant, RestaurantInfo, Title, Address } from './style';
 
 function RestaurantCard() {
@@ -6,7 +7,7 @@ function RestaurantCard() {
     <Restaurant>
       <RestaurantInfo>
         <Title>Nome do Restaurante</Title>
-        <p>Avaliação</p>
+        <ReactStars count={5} isHalf activeColor="#e7711c" edit={false} value={4} />
         <Address>Manaus, AM, 69000</Address>
       </RestaurantInfo>
     </Restaurant>
