@@ -35,3 +35,10 @@ export const Address = styled.span`
   line-height: 19px;
   margin: 10px 0;
 `;
+
+export const RestaurantPhoto = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 6px;
+  object-fit: cover;
+`;
