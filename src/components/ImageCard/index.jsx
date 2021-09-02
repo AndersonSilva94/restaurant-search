@@ -5,12 +5,23 @@ const Card = styled.div`
   width: 90px;
   height: 90px;
   border-radius: 6px;
-  background-image: ${(props) => props.photo};
+  background-image: url(${(props) => props.photo});
   background-size: cover;
 `;
 
-function ImageCard({ photo }) {
-  return <Card photo={photo} />;
+const Title = styled.p`
+  font-family: ${(props) => props.theme.fonts.fontFamily};
+  color: white;
+  padding: 10px;
+  font-size: 0.9rem;
+`;
+
+function ImageCard({ photo, title }) {
+  return (
+    <Card photo={photo}>
+      <Title>{title}</Title>
+    </Card>
+  );
 }
 
 export default ImageCard;

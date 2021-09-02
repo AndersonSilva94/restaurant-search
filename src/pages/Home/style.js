@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Slider from 'react-slick';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -29,6 +30,12 @@ export const Map = styled.div`
   width: 100vw;
 `;
 
+export const Carousel = styled(Slider)`
+  .slick-slide {
+    margin-right: 16px;
+  }
+`;
+
 export const CarouselTitle = styled.h1`
   font-family: ${(props) => props.theme.fonts.fontFamily};
   color: ${(props) => props.theme.colors.text};
@@ -37,3 +44,6 @@ export const CarouselTitle = styled.h1`
   line-height: 29px;
   margin: 16px 0 16px 10px;
 `;
+
+// ao estilizar tags ou elementos nativos, use styled.elemento
+// ao estilizar componentes, use styled(Elemento)
