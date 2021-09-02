@@ -5,7 +5,7 @@ import MaterialIcon from '@material/react-material-icon';
 import { Container, Search, Logo, Wrapper, Map, CarouselTitle, Carousel } from './style';
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
-import { Card } from '../../components';
+import { Card, RestaurantCard } from '../../components';
 
 function Home() {
   const [inputValue, setInputValue] = useState();
@@ -30,15 +30,16 @@ function Home() {
             trailingIcon={<MaterialIcon role="button" icon="search" />}>
             <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
           </TextField>
+          <CarouselTitle>Na sua área</CarouselTitle>
+          <Carousel {...settings}>
+            <Card photo={restaurante} title="Nome do restaurante" />
+            <Card photo={restaurante} title="Nome do restaurante" />
+            <Card photo={restaurante} title="Nome do restaurante" />
+            <Card photo={restaurante} title="Nome do restaurante" />
+            <Card photo={restaurante} title="Nome do restaurante" />
+          </Carousel>
         </Search>
-        <CarouselTitle>Na sua área</CarouselTitle>
-        <Carousel {...settings}>
-          <Card photo={restaurante} title="Nome do restaurante" />
-          <Card photo={restaurante} title="Nome do restaurante" />
-          <Card photo={restaurante} title="Nome do restaurante" />
-          <Card photo={restaurante} title="Nome do restaurante" />
-          <Card photo={restaurante} title="Nome do restaurante" />
-        </Carousel>
+        <RestaurantCard />
       </Container>
       <Map />
     </Wrapper>
