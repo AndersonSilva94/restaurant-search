@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 
 import { setRestaurants } from '../../redux/actions/restaurants';
 
 export function MapContainer(props) {
   const dispatch = useDispatch();
+  const { restaurants } = useSelector((state) => state.restaurants);
   const [map, setMap] = useState(null); // o estado é dinâmico, quando o usuário digitar o valor será alterado
   const { google, query } = props;
 
@@ -32,7 +33,7 @@ export function MapContainer(props) {
     // utilitário que recebe o objeto de requisição e uma callback com os resultados e status
     service.textSearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        console.log('restaurantes => ', results);
+        // console.log('restaurantes => ', results);
         dispatch(setRestaurants(results));
       }
     });
@@ -53,7 +54,7 @@ export function MapContainer(props) {
     // utilitário que recebe o objeto de requisição e uma callback com os resultados e status
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        console.log('restaurantes => ', results);
+        // console.log('restaurantes => ', results);
         dispatch(setRestaurants(results));
       }
     });
@@ -71,7 +72,18 @@ export function MapContainer(props) {
       centerAroundCurrentLocation // verifica ao redor da localização
       onReady={onMapReady} // quando o mapa carregar
       onRecenter={onMapReady} // quando fizer a pesquisa e/ou o usuário permite que verifique sua localização
-    />
+    >
+      {restaurants.map((restaurant) => (
+        <Marker
+          key={restaurant.place_id}
+          name={restaurant.name}
+          position={{
+            lat: restaurant.geometry.location.lat(),
+            lng: restaurant.geometry.location.lng(),
+          }}
+        />
+      ))}
+    </Map>
   );
 }
 
