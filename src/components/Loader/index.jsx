@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import animatedLoading from '../../assets/restaurant.json';
+import animatedLoading from '../../assets/restaurants-loading.json';
 
 function Loader() {
   const defaultOptions = {
@@ -12,7 +12,7 @@ function Loader() {
     },
   };
 
-  return <Lottie options={defaultOptions} />;
+  return <Lottie options={defaultOptions} height={250} width={250} />;
 }
 
 export default Loader;
