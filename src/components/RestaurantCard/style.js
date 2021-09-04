@@ -17,6 +17,7 @@ export const Restaurant = styled.div`
 export const RestaurantInfo = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 10px;
 `;
 
 export const Title = styled.span`
@@ -41,4 +42,5 @@ export const RestaurantPhoto = styled.img`
   height: 100px;
   border-radius: 6px;
   object-fit: cover;
+  display: ${(props) => (props.imageLoaded ? 'block' : 'none')};
 `;
