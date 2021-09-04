@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
-import { Card, RestaurantCard, Modal, Map } from '../../components';
+import { Card, RestaurantCard, Modal, Map, Loader } from '../../components';
 
 import {
   Container,
@@ -61,16 +61,22 @@ function Home() {
               onChange={(e) => setInputValue(e.target.value)}
             />
           </TextField>
-          <CarouselTitle>Na sua área</CarouselTitle>
-          <Carousel {...settings}>
-            {restaurants.map((restaurant) => (
-              <Card
-                key={restaurant.place_id}
-                photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurante}
-                title={restaurant.name}
-              />
-            ))}
-          </Carousel>
+          {restaurants.length > 0 ? (
+            <>
+              <CarouselTitle>Na sua área</CarouselTitle>
+              <Carousel {...settings}>
+                {restaurants.map((restaurant) => (
+                  <Card
+                    key={restaurant.place_id}
+                    photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurante}
+                    title={restaurant.name}
+                  />
+                ))}
+              </Carousel>
+            </>
+          ) : (
+            <Loader />
+          )}
         </Search>
         {restaurants.map((restaurant) => (
           <RestaurantCard
