@@ -64,5 +64,19 @@ export const ModalContent = styled.p`
   font-size: 16px;
 `;
 
+export const ModalOpened = styled.div`
+  margin-bottom: 10px;
+  background-color: ${(props) => (props.isOpen ? '#FF2800' : '#00FF00')};
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  font-family: ${(props) => props.theme.fonts.fontFamily};
+  font-weight: normal;
+  line-height: 19px;
+  font-size: 20px;
+  padding: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+`;
+
 // ao estilizar tags ou elementos nativos, use styled.elemento
 // ao estilizar componentes, use styled(Elemento)

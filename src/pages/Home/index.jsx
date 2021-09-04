@@ -14,6 +14,7 @@ import {
   Carousel,
   ModalTitle,
   ModalContent,
+  ModalOpened,
 } from './style';
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
@@ -92,11 +93,11 @@ function Home() {
             <ModalTitle>{restaurantSelected?.name}</ModalTitle>
             <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
             <ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
-            <ModalContent>
+            <ModalOpened isOpen={!restaurantSelected?.opening_hours?.open_now}>
               {restaurantSelected?.opening_hours?.open_now
                 ? 'Aberto agora'
                 : 'Fechado neste momento'}
-            </ModalContent>
+            </ModalOpened>
           </>
         ) : (
           <>
