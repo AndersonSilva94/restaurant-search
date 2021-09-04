@@ -45,6 +45,10 @@ export const CarouselTitle = styled.h1`
   margin: 16px 0 16px 10px;
 `;
 
+export const ModalCard = styled.div`
+  display: flex;
+`;
+
 export const ModalTitle = styled.p`
   margin-bottom: 10px;
   letter-spacing: 0.11px;
@@ -76,6 +80,22 @@ export const ModalOpened = styled.div`
   padding: 10px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   border-radius: 6px;
+`;
+
+export const ModalInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  margin-right: 15px;
+`;
+
+export const ModalPhoto = styled.img`
+  width: 150px;
+  height: 150px;
+  border-radius: 6px;
+  object-fit: cover;
+  display: ${(props) => (props.imageLoaded ? 'block' : 'none')};
+  align-self: center;
 `;
 
 // ao estilizar tags ou elementos nativos, use styled.elemento

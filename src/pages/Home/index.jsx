@@ -15,11 +15,15 @@ import {
   ModalTitle,
   ModalContent,
   ModalOpened,
+  ModalCard,
+  ModalInfo,
+  ModalPhoto,
 } from './style';
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
 
 function Home() {
+  const [loadImage, setLoadImage] = useState(false);
   const [inputValue, setInputValue] = useState();
   const [query, setQuery] = useState(null);
   const [placeId, setPlaceId] = useState(null);
@@ -89,16 +93,25 @@ function Home() {
       <Map query={query} placeId={placeId} />
       <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
         {restaurantSelected ? (
-          <>
-            <ModalTitle>{restaurantSelected?.name}</ModalTitle>
-            <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
-            <ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
-            <ModalOpened isOpen={!restaurantSelected?.opening_hours?.open_now}>
-              {restaurantSelected?.opening_hours?.open_now
-                ? 'Aberto agora'
-                : 'Fechado neste momento'}
-            </ModalOpened>
-          </>
+          <ModalCard>
+            <ModalInfo>
+              <ModalTitle>{restaurantSelected?.name}</ModalTitle>
+              <ModalContent>{restaurantSelected?.formatted_phone_number}</ModalContent>
+              <ModalContent>{restaurantSelected?.formatted_address}</ModalContent>
+              <ModalOpened isOpen={!restaurantSelected?.opening_hours?.open_now}>
+                {restaurantSelected?.opening_hours?.open_now
+                  ? 'Aberto agora'
+                  : 'Fechado neste momento'}
+              </ModalOpened>
+            </ModalInfo>
+            <ModalPhoto
+              imageLoaded={loadImage}
+              src={restaurantSelected.photos ? restaurantSelected.photos[0].getUrl() : restaurante}
+              onLoad={() => setLoadImage(true)}
+              alt={`Foto de ${restaurantSelected?.name}`}
+            />
+            {!loadImage && <Skeleton width="150px" height="150px" />}
+          </ModalCard>
         ) : (
           <>
             <Skeleton width="10px" height="10px" />
