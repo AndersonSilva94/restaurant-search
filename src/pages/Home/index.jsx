@@ -11,8 +11,9 @@ import restaurante from '../../assets/restaurante-fake.png';
 function Home() {
   const [inputValue, setInputValue] = useState();
   const [query, setQuery] = useState(null);
+  const [placeId, setPlaceId] = useState(null);
   const [modalOpened, setModalOpened] = useState(false);
-  const { restaurants } = useSelector((state) => state.restaurants);
+  const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
 
   const settings = {
     dots: false,
@@ -28,6 +29,11 @@ function Home() {
     if (event.key === 'Enter') {
       setQuery(inputValue);
     }
+  };
+
+  const handleOpenModal = (placeId) => {
+    setPlaceId(placeId);
+    setModalOpened(true);
   };
 
   return (
@@ -55,15 +61,15 @@ function Home() {
               />
             ))}
           </Carousel>
-          <button type="button" onClick={() => setModalOpened(true)}>
-            Abrir Modal
-          </button>
         </Search>
         {restaurants.map((restaurant) => (
-          <RestaurantCard restaurant={restaurant} />
+          <RestaurantCard
+            onClick={() => handleOpenModal(restaurant.place_id)}
+            restaurant={restaurant}
+          />
         ))}
       </Container>
-      <Map query={query} />
+      <Map query={query} placeId={placeId} />
       <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
     </Wrapper>
   );
