@@ -46,7 +46,7 @@ function Home() {
         <RestaurantCard />
       </Container>
       <Map />
-      {/* <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} /> */}
+      <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
     </Wrapper>
   );
 }
