@@ -1,9 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 
 export function MapContainer(props) {
-  const [maps, setMaps] = useState(null); // o estado é dinâmico, quando o usuário digitar o valor será alterado
-  const { google } = props;
+  const [map, setMap] = useState(null); // o estado é dinâmico, quando o usuário digitar o valor será alterado
+  const { google, query } = props;
+
+  // renderizar toda vez que a query for modificada
+  useEffect(() => {
+    // se não for null
+    if (query) {
+      searchByQuery(query);
+    }
+  }, [query]);
+
+  // função que vai pesquisar conforme o valor que o usuário passar
+  const searchByQuery = (query) => {
+    // instanciar o serviço (documentação referencia)
+    const service = new google.maps.places.PlacesService(map);
+
+    const request = {
+      location: map.center, // location -> centralização do mapa (agora baseada na pesquisa do usuário)
+      radius: '2000', // radius -> em metros traz todas as referências próximas ao lugar marcado
+      type: ['restaurant'], // filtra o tipo de lugar que será pesquisado
+      query, // qual o valor que o usuário digitou
+    };
+
+    // utilitário que recebe o objeto de requisição e uma callback com os resultados e status
+    service.textSearch(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        console.log('restaurantes => ', results);
+      }
+    });
+  };
 
   // função que faz a busca de lugares próximos quando o mapa carregar e passar lat./long. para ela
   // 1) map -> onde vai marcar o mapa. 2) center -> centralizar o mapa
@@ -19,7 +47,7 @@ export function MapContainer(props) {
 
     // utilitário que recebe o objeto de requisição e uma callback com os resultados e status
     service.nearbySearch(request, (results, status) => {
-      if (status === google.maps.places.PlacesService.OK) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
         console.log('restaurantes => ', results);
       }
     });
@@ -27,7 +55,7 @@ export function MapContainer(props) {
 
   // (evento, callback)
   const onMapReady = (_, map) => {
-    setMaps(map);
+    setMap(map);
     searchNearby(map, map.center);
   };
 
