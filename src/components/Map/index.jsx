@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 
-import { setRestaurants } from '../../redux/actions/restaurants';
+import { setRestaurants, setRestaurant } from '../../redux/actions/restaurants';
 
 export function MapContainer(props) {
   const dispatch = useDispatch();
   const { restaurants } = useSelector((state) => state.restaurants);
   const [map, setMap] = useState(null); // o estado é dinâmico, quando o usuário digitar o valor será alterado
-  const { google, query } = props;
+  const { google, query, placeId } = props;
 
   // renderizar toda vez que a query for modificada
   useEffect(() => {
@@ -17,6 +17,31 @@ export function MapContainer(props) {
       searchByQuery(query);
     }
   }, [query]);
+
+  useEffect(() => {
+    if (placeId) {
+      getRestaurantById(placeId);
+    }
+  }, [placeId]);
+
+  // função que vai pegar o place_id do restaurante e buscar todas as informações mais detalhadas sobre
+  const getRestaurantById = (placeId) => {
+    // instanciar o serviço (documentação referencia)
+    const service = new google.maps.places.PlacesService(map);
+
+    const request = {
+      placeId,
+      fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
+    };
+
+    // utilitário que recebe o objeto de requisição e uma callback com os resultados e status
+    service.getDetails(request, (place, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        // console.log('restaurantes => ', results);
+        dispatch(setRestaurant(place));
+      }
+    });
+  };
 
   // função que vai pesquisar conforme o valor que o usuário passar
   const searchByQuery = (query) => {
@@ -68,6 +93,7 @@ export function MapContainer(props) {
 
   return (
     <Map
+      {...props}
       google={google}
       centerAroundCurrentLocation // verifica ao redor da localização
       onReady={onMapReady} // quando o mapa carregar
