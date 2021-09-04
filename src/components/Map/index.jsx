@@ -28,6 +28,7 @@ export function MapContainer(props) {
   const getRestaurantById = (placeId) => {
     // instanciar o serviço (documentação referencia)
     const service = new google.maps.places.PlacesService(map);
+    dispatch(setRestaurant(null));
 
     const request = {
       placeId,
@@ -47,6 +48,7 @@ export function MapContainer(props) {
   const searchByQuery = (query) => {
     // instanciar o serviço (documentação referencia)
     const service = new google.maps.places.PlacesService(map);
+    dispatch(setRestaurants([]));
 
     const request = {
       location: map.center, // location -> centralização do mapa (agora baseada na pesquisa do usuário)
@@ -69,6 +71,7 @@ export function MapContainer(props) {
   const searchNearby = (map, center) => {
     // instanciar o serviço (documentação referencia)
     const service = new google.maps.places.PlacesService(map);
+    dispatch(setRestaurants([]));
 
     const request = {
       location: center, // location -> centralização do mapa
