@@ -46,11 +46,13 @@ function Home() {
           </TextField>
           <CarouselTitle>Na sua área</CarouselTitle>
           <Carousel {...settings}>
-            <Card photo={restaurante} title="Nome do restaurante" />
-            <Card photo={restaurante} title="Nome do restaurante" />
-            <Card photo={restaurante} title="Nome do restaurante" />
-            <Card photo={restaurante} title="Nome do restaurante" />
-            <Card photo={restaurante} title="Nome do restaurante" />
+            {restaurants.map((restaurant) => (
+              <Card
+                key={restaurant.place_id}
+                photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurante}
+                title={restaurant.name}
+              />
+            ))}
           </Carousel>
           <button type="button" onClick={() => setModalOpened(true)}>
             Abrir Modal
