@@ -16,12 +16,14 @@ export function MapContainer(props) {
     if (query) {
       searchByQuery(query);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   useEffect(() => {
     if (placeId) {
       getRestaurantById(placeId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placeId]);
 
   // função que vai pegar o place_id do restaurante e buscar todas as informações mais detalhadas sobre
