@@ -25,7 +25,7 @@ export const Dialog = styled.div`
   ); //é uma função para pegar o valor do elemento pai e diminuir x valores
   width: 500px;
   padding: 24px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.block};
   box-shadow: 0px 0px 32px rgba(78, 89, 131, 0.2);
   border-radius: 8px;
 `;

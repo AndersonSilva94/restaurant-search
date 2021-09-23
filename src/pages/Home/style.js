@@ -14,7 +14,7 @@ export const Container = styled.aside`
 `;
 
 export const Search = styled.section`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.block};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,7 +22,7 @@ export const Search = styled.section`
 `;
 
 export const Logo = styled.img`
-  margin-bottom: 15px;
+  margin: 15px 0;
 `;
 
 export const Map = styled.div`

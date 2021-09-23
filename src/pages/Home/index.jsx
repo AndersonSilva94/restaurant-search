@@ -1,5 +1,7 @@
 /* eslint-disable camelcase */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { ThemeContext } from 'styled-components';
+import Switch from 'react-switch';
 import { useSelector } from 'react-redux';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
@@ -22,7 +24,8 @@ import {
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
 
-function Home() {
+function Home({ toggleTheme }) {
+  const { colors, title } = useContext(ThemeContext);
   const [loadImage, setLoadImage] = useState(false);
   const [inputValue, setInputValue] = useState();
   const [query, setQuery] = useState(null);
@@ -55,6 +58,14 @@ function Home() {
     <Wrapper>
       <Container>
         <Search>
+          <Switch
+            onChange={toggleTheme}
+            checked={title === 'dark'}
+            checkedIcon={false}
+            uncheckedIcon={false}
+            offColor={colors.offColor}
+            onColor={colors.primary}
+          />
           <Logo src={logo} alt="restaurant search logo" />
           <TextField
             label="Pesquisar restaurante"
