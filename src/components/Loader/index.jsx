@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import animatedLoading from '../../assets/restaurants-loading.json';
+import animatedLoading from '../../assets/restaurant.json';
 
 function Loader() {
   const defaultOptions = {

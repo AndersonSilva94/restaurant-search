@@ -72,6 +72,7 @@ function Home() {
               <Carousel {...settings}>
                 {restaurants.map((restaurant) => (
                   <Card
+                    onClick={() => handleOpenModal(restaurant.place_id)}
                     key={restaurant.place_id}
                     photo={restaurant.photos ? restaurant.photos[0].getUrl() : restaurante}
                     title={restaurant.name}
