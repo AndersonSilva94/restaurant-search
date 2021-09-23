@@ -1,5 +1,24 @@
 import styled from 'styled-components';
 import Slider from 'react-slick';
+/* import MaterialIcon from '@material/react-material-icon';
+
+export const Material = styled(MaterialIcon)`
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  position: relative;
+  left: -39px;
+  top: 1px;
+`; */
+
+export const TextInputStyle = styled.input`
+  border: 2px solid ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
+  background: transparent;
+  padding: 15px;
+  border-radius: 6px;
+  margin: 15px 0;
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -17,7 +36,7 @@ export const Container = styled.aside`
 export const ToggleTheme = styled.div`
   display: flex;
   flex-direction: row-reverse;
-`
+`;
 
 export const Search = styled.section`
   background-color: ${(props) => props.theme.colors.block};

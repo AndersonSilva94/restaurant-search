@@ -3,11 +3,13 @@ import React, { useContext, useState } from 'react';
 import { ThemeContext } from 'styled-components';
 import Switch from 'react-switch';
 import { useSelector } from 'react-redux';
-import TextField, { Input } from '@material/react-text-field';
-import MaterialIcon from '@material/react-material-icon';
+// import TextField, { Input } from '@material/react-text-field';
+// import MaterialIcon from '@material/react-material-icon';
 import { Card, RestaurantCard, Modal, Map, Loader, Skeleton } from '../../components';
 
 import {
+  // Material,
+  TextInputStyle,
   Container,
   ToggleTheme,
   Search,
@@ -70,16 +72,13 @@ function Home({ toggleTheme }) {
             />
           </ToggleTheme>
           <Logo src={logo} alt="restaurant search logo" />
-          <TextField
-            label="Pesquisar restaurante"
-            outlined
-            trailingIcon={<MaterialIcon role="button" icon="search" />}>
-            <Input
-              value={inputValue}
-              onKeyPress={handleKeyPress}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-          </TextField>
+          <TextInputStyle
+            placeholder="Pesquisar restaurante ou endereço"
+            value={inputValue}
+            onKeyPress={handleKeyPress}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          {/* <Material role="button" icon="search" /> */}
           {restaurants.length > 0 ? (
             <>
               <CarouselTitle>Na sua área</CarouselTitle>
