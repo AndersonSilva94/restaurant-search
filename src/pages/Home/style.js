@@ -8,10 +8,16 @@ export const Wrapper = styled.div`
 
 export const Container = styled.aside`
   background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.text};
   width: 360px;
   height: 100vh;
   overflow-y: auto;
 `;
+
+export const ToggleTheme = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`
 
 export const Search = styled.section`
   background-color: ${(props) => props.theme.colors.block};
@@ -38,7 +44,6 @@ export const Carousel = styled(Slider)`
 
 export const CarouselTitle = styled.h1`
   font-family: ${(props) => props.theme.fonts.fontFamily};
-  color: ${(props) => props.theme.colors.text};
   font-size: 24px;
   font-weight: bold;
   line-height: 29px;

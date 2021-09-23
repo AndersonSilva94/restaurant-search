@@ -9,6 +9,7 @@ import { Card, RestaurantCard, Modal, Map, Loader, Skeleton } from '../../compon
 
 import {
   Container,
+  ToggleTheme,
   Search,
   Logo,
   Wrapper,
@@ -58,14 +59,16 @@ function Home({ toggleTheme }) {
     <Wrapper>
       <Container>
         <Search>
-          <Switch
-            onChange={toggleTheme}
-            checked={title === 'dark'}
-            checkedIcon={false}
-            uncheckedIcon={false}
-            offColor={colors.offColor}
-            onColor={colors.primary}
-          />
+          <ToggleTheme>
+            <Switch
+              onChange={toggleTheme}
+              checked={title === 'dark'}
+              checkedIcon={false}
+              uncheckedIcon={false}
+              offColor={colors.offColor}
+              onColor={colors.primary}
+            />
+          </ToggleTheme>
           <Logo src={logo} alt="restaurant search logo" />
           <TextField
             label="Pesquisar restaurante"
